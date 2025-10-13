@@ -1,0 +1,619 @@
+# OpenSpec TUI Editor
+
+> A beautiful terminal user interface for creating and editing OpenSpec specifications
+
+[![Python](https://img.shields.io/badge/python-3.8+-blue.svg)](https://www.python.org/downloads/)
+[![Textual](https://img.shields.io/badge/textual-latest-purple.svg)](https://textual.textualize.io/)
+[![License](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
+
+OpenSpec TUI Editor is a keyboard-driven terminal application that streamlines the creation and management of [OpenSpec](https://github.com/Fission-AI/OpenSpec) specifications for AI-assisted development.
+
+## ✨ Features
+
+- 🎨 **Beautiful TUI** - Modern, intuitive terminal interface built with Textual
+- 📝 **Multi-Tab Editor** - Edit proposal, tasks, spec deltas, and design docs simultaneously
+- ⚡ **Fast Workflow** - Create complete OpenSpec changes in minutes
+- 💾 **Auto-Structure** - Automatically generates proper OpenSpec folder structure
+- ⌨️ **Keyboard First** - Efficient keyboard shortcuts for power users
+- 🎯 **Template-Driven** - Pre-filled templates following OpenSpec best practices
+- 📊 **Change Tracking** - View and manage all your OpenSpec changes
+- 🔍 **Validation Ready** - Output compatible with `openspec validate` command
+
+## 📸 Screenshots
+
+### Main Menu
+```
+╭─────────────────────────────────────────────────────╮
+│           OpenSpec TUI Editor                       │
+│   Spec-driven development for AI coding assistants  │
+│                                                     │
+│   🆕 Create New Change                              │
+│   📂 Open Existing Change                           │
+│   📋 List Changes                                   │
+│   ℹ️  About OpenSpec                                │
+│   🚪 Exit                                           │
+│                                                     │
+│   Recent changes:                                   │
+│   • add-user-profile (profile)                      │
+│   • implement-2fa (auth)                            │
+╰─────────────────────────────────────────────────────╯
+```
+
+### Editor View
+```
+┌─────────────────────────────────────────────────────┐
+│ Change: add-user-profile  Feature: profile  Author: │
+├─────────────────────────────────────────────────────┤
+│ ┌ Proposal ┐  Tasks   Spec Delta   Design          │
+│ │                                                   ││
+│ │ # Proposal: Add User Profile                     ││
+│ │                                                   ││
+│ │ ## Overview                                       ││
+│ │ This change adds comprehensive user profile...   ││
+│ │                                                   ││
+│ └─────────────────────────────────────────────────┘│
+├─────────────────────────────────────────────────────┤
+│ ^S Save  ^Q Quit  ^P Preview                        │
+└─────────────────────────────────────────────────────┘
+```
+
+## 🚀 Quick Start
+
+### Prerequisites
+
+- Python 3.8 or higher
+- pip (Python package manager)
+
+### Installation
+
+```bash
+# Install Textual
+pip install textual
+
+# Download the editor
+curl -O https://raw.githubusercontent.com/your-repo/openspec-tui/main/openspec_tui.py
+
+# Make it executable (optional)
+chmod +x openspec_tui.py
+```
+
+### Usage
+
+```bash
+# Run the TUI editor
+python openspec_tui.py
+
+# Or if you made it executable
+./openspec_tui.py
+```
+
+## 📖 User Guide
+
+### Creating a New Change
+
+1. Launch the application: `python openspec_tui.py`
+2. Select **"Create New Change"** from the main menu
+3. Fill in the required information:
+   - **Change Name**: Use kebab-case (e.g., `add-user-profile`)
+   - **Feature Area**: The domain/module (e.g., `auth`, `profile`, `api`)
+   - **Author**: Your name
+   - **Include Design**: Check if you need a design document
+4. Click **"Create"** to open the editor
+
+### Editing Files
+
+The editor opens with multiple tabs:
+
+- **Proposal Tab**: Write the problem statement, solution, and success criteria
+- **Tasks Tab**: Create implementation checklist with numbered tasks
+- **Spec Delta Tab**: Define ADDED/MODIFIED/REMOVED requirements
+- **Design Tab**: Document technical architecture (if included)
+
+Navigate between tabs using:
+- Mouse click on tab names
+- `Tab` key to cycle forward
+- `Shift+Tab` to cycle backward
+
+### Saving Your Work
+
+Press `Ctrl+S` or use the File menu to save. Files are automatically saved to:
+
+```
+openspec/
+└── changes/
+    └── your-change-name/
+        ├── metadata.json          # Change tracking info
+        ├── proposal.md            # Problem & solution
+        ├── tasks.md               # Implementation tasks
+        ├── design.md              # Technical design (optional)
+        └── specs/
+            └── feature-area/
+                └── spec.md        # Spec delta
+```
+
+### Opening Existing Changes
+
+1. Select **"Open Existing Change"** from the main menu
+2. Browse available changes in the `openspec/changes/` directory
+3. Select a change to edit
+
+### Listing Changes
+
+Select **"List Changes"** to see all changes in your project. Recent changes are automatically displayed on the main menu.
+
+## ⌨️ Keyboard Shortcuts
+
+### Global Shortcuts
+
+| Shortcut | Action |
+|----------|--------|
+| `Ctrl+S` | Save all files |
+| `Ctrl+Q` | Quit current screen |
+| `Ctrl+P` | Preview current file |
+| `Ctrl+C` | Exit application |
+
+### Navigation
+
+| Shortcut | Action |
+|----------|--------|
+| `Tab` | Next tab/field |
+| `Shift+Tab` | Previous tab/field |
+| `↑` / `↓` | Navigate lists |
+| `Enter` | Select/Activate |
+| `Esc` | Cancel/Back |
+
+### Editor Shortcuts
+
+| Shortcut | Action |
+|----------|--------|
+| `Ctrl+A` | Select all |
+| `Ctrl+C` | Copy |
+| `Ctrl+V` | Paste |
+| `Ctrl+X` | Cut |
+| `Ctrl+Z` | Undo |
+| `Ctrl+Y` | Redo |
+
+## 📁 Output Structure
+
+The TUI editor generates OpenSpec-compliant folder structures:
+
+```
+your-project/
+├── openspec/
+│   ├── specs/                    # Source of truth specs
+│   │   └── auth/
+│   │       └── spec.md
+│   └── changes/                  # Active changes
+│       ├── add-2fa/
+│       │   ├── metadata.json     # Change metadata
+│       │   ├── proposal.md       # Why & what
+│       │   ├── tasks.md          # Implementation checklist
+│       │   ├── design.md         # Technical design
+│       │   └── specs/
+│       │       └── auth/
+│       │           └── spec.md   # Spec delta
+│       └── add-user-profile/
+│           └── ...
+```
+
+## 🎯 OpenSpec Integration
+
+This TUI editor seamlessly integrates with the OpenSpec workflow:
+
+### 1. Create with TUI
+```bash
+python openspec_tui.py
+# Create your change using the interactive editor
+```
+
+### 2. Validate
+```bash
+openspec validate your-change-name
+```
+
+### 3. Implement with AI
+```bash
+# Using Claude Code
+/openspec:apply your-change-name
+
+# Using Cursor
+/openspec-apply your-change-name
+
+# Using other tools
+"Apply the OpenSpec change your-change-name"
+```
+
+### 4. Archive
+```bash
+openspec archive your-change-name
+```
+
+## 🛠️ Advanced Usage
+
+### Custom Templates
+
+To customize templates, edit the template strings in `openspec_tui.py`:
+
+```python
+PROPOSAL_TEMPLATE = """
+# Your custom proposal template
+...
+"""
+```
+
+### Environment Variables
+
+```bash
+# Set default author
+export OPENSPEC_AUTHOR="Your Name"
+
+# Set custom OpenSpec directory
+export OPENSPEC_DIR="./my-specs"
+```
+
+### Integration with Git
+
+The editor works perfectly with version control:
+
+```bash
+# After creating/editing a change
+git add openspec/changes/your-change-name
+git commit -m "feat: add specification for user profile"
+```
+
+## 🔧 Configuration
+
+### Default Settings
+
+Create a `.openspec-tui.json` in your home directory:
+
+```json
+{
+  "author": "Your Name",
+  "default_feature_area": "core",
+  "include_design_by_default": true,
+  "editor_theme": "dracula",
+  "auto_save": false
+}
+```
+
+### Themes
+
+Supported editor themes:
+- `dracula` (default)
+- `monokai`
+- `github-dark`
+- `vscode-dark`
+
+## 📊 Workflow Example
+
+Let's create a complete OpenSpec change for adding two-factor authentication:
+
+```bash
+# 1. Launch TUI
+python openspec_tui.py
+
+# 2. Create new change
+Change Name: add-2fa
+Feature Area: auth
+Author: Jane Developer
+[✓] Include Design
+
+# 3. Edit in tabs:
+# - Proposal: Describe 2FA requirements
+# - Tasks: Break down into implementation steps
+# - Spec: Add TOTP requirements with scenarios
+# - Design: Document TOTP architecture
+
+# 4. Save (Ctrl+S)
+✓ Saved to openspec/changes/add-2fa
+
+# 5. Validate
+openspec validate add-2fa
+
+# 6. Implement with AI assistant
+/openspec:apply add-2fa
+
+# 7. Archive when complete
+openspec archive add-2fa
+```
+
+## 🤝 Contributing
+
+Contributions are welcome! Here's how you can help:
+
+### Reporting Bugs
+
+Open an issue with:
+- Clear description of the bug
+- Steps to reproduce
+- Expected vs actual behavior
+- Your environment (OS, Python version, Textual version)
+
+### Suggesting Features
+
+Open an issue with:
+- Clear description of the feature
+- Use cases and benefits
+- Proposed implementation (optional)
+
+### Submitting Pull Requests
+
+1. Fork the repository
+2. Create a feature branch: `git checkout -b feature/amazing-feature`
+3. Make your changes
+4. Test thoroughly
+5. Commit: `git commit -m "feat: add amazing feature"`
+6. Push: `git push origin feature/amazing-feature`
+7. Open a Pull Request
+
+### Development Setup
+
+```bash
+# Clone the repository
+git clone https://github.com/your-username/openspec-tui.git
+cd openspec-tui
+
+# Install dependencies
+pip install textual textual-dev
+
+# Run in development mode with live reload
+textual run --dev openspec_tui.py
+
+# Run tests
+python -m pytest tests/
+```
+
+## 🐛 Troubleshooting
+
+### TUI doesn't render properly
+
+**Problem**: Characters appear garbled or colors are wrong
+
+**Solution**: 
+```bash
+# Ensure your terminal supports 256 colors
+echo $TERM
+
+# If not, set it
+export TERM=xterm-256color
+
+# Or use a modern terminal emulator like:
+# - Alacritty
+# - iTerm2 (macOS)
+# - Windows Terminal
+```
+
+### Import errors
+
+**Problem**: `ModuleNotFoundError: No module named 'textual'`
+
+**Solution**:
+```bash
+pip install --upgrade textual
+```
+
+### Permission errors when saving
+
+**Problem**: Cannot write to `openspec/` directory
+
+**Solution**:
+```bash
+# Ensure you have write permissions
+chmod -R u+w openspec/
+
+# Or run from your project root
+cd /path/to/your/project
+python /path/to/openspec_tui.py
+```
+
+## 📚 Resources
+
+### OpenSpec Documentation
+- [OpenSpec GitHub](https://github.com/Fission-AI/OpenSpec)
+- [OpenSpec Website](https://openspec.dev/)
+- [OpenSpec Discord](https://discord.gg/YctCnvvshC)
+
+### Textual Framework
+- [Textual Documentation](https://textual.textualize.io/)
+- [Textual GitHub](https://github.com/Textualize/textual)
+- [Textual Discord](https://discord.gg/Enf6Z3qhVr)
+
+### Spec-Driven Development
+- [GitHub Blog: Spec-driven development with AI](https://github.blog/ai-and-ml/generative-ai/spec-driven-development-with-ai-get-started-with-a-new-open-source-toolkit/)
+- [AGENTS.md Convention](https://agents.md/)
+
+## 🎓 Tutorial
+
+### Complete Walkthrough: Adding a Feature
+
+Let's add a "password reset" feature step by step:
+
+#### Step 1: Launch & Create
+
+```bash
+python openspec_tui.py
+```
+
+Select "Create New Change" and fill in:
+- Change Name: `add-password-reset`
+- Feature Area: `auth`
+- Author: `Your Name`
+- Include Design: ✓
+
+#### Step 2: Write Proposal
+
+In the Proposal tab, document:
+
+```markdown
+## Overview
+Add password reset functionality via email to allow users to 
+recover their accounts securely.
+
+## Problem Statement
+Users who forget passwords have no recovery mechanism, leading 
+to account lockout and support tickets.
+
+## Success Criteria
+- [ ] Users can request password reset via email
+- [ ] Reset links expire after 1 hour
+- [ ] Old passwords cannot be reused
+```
+
+#### Step 3: Define Tasks
+
+In the Tasks tab, create implementation checklist:
+
+```markdown
+## 1. Database Setup
+- [ ] 1.1 Add password_reset_tokens table
+- [ ] 1.2 Add indexes for email and token lookup
+
+## 2. Backend API
+- [ ] 2.1 POST /api/reset-password (request reset)
+- [ ] 2.2 POST /api/reset-password/confirm (set new password)
+
+## 3. Email Service
+- [ ] 3.1 Create reset email template
+- [ ] 3.2 Implement token generation
+```
+
+#### Step 4: Specify Requirements
+
+In the Spec Delta tab, add requirements:
+
+```markdown
+## ADDED Requirements
+
+### Requirement: Password Reset Request
+
+The system SHALL allow users to request a password reset by 
+providing their email address.
+
+#### Scenario: Valid reset request
+- GIVEN a user with email "user@example.com"
+- WHEN they request a password reset
+- THEN an email with a reset link is sent
+- AND the link expires after 1 hour
+```
+
+#### Step 5: Document Design
+
+In the Design tab, describe architecture:
+
+```markdown
+## Technical Overview
+Password reset uses time-limited JWT tokens sent via email.
+
+## Security Considerations
+- Tokens expire after 1 hour
+- Rate limiting: 3 requests per hour per email
+- Tokens are single-use only
+```
+
+#### Step 6: Save
+
+Press `Ctrl+S` to save all files.
+
+#### Step 7: Continue with OpenSpec
+
+```bash
+# Validate the specification
+openspec validate add-password-reset
+
+# Implement with your AI assistant
+/openspec:apply add-password-reset
+
+# After implementation, archive
+openspec archive add-password-reset
+```
+
+## 🏆 Best Practices
+
+### Naming Conventions
+
+✅ **Good change names:**
+- `add-user-authentication`
+- `fix-profile-validation`
+- `refactor-api-endpoints`
+
+❌ **Bad change names:**
+- `Update_stuff`
+- `new feature`
+- `AuthenticationChanges`
+
+### Feature Areas
+
+Organize by domain:
+- `auth` - Authentication & authorization
+- `api` - API endpoints & contracts
+- `ui` - User interface components
+- `data` - Database & data models
+- `core` - Core business logic
+
+### Task Writing
+
+✅ **Good tasks:**
+- `Add email field to users table with NOT NULL constraint`
+- `Implement JWT token generation with 1-hour expiry`
+
+❌ **Bad tasks:**
+- `Fix the database`
+- `Make it work`
+- `Update API`
+
+### Spec Requirements
+
+Use precise language:
+- **SHALL / MUST**: Mandatory requirements
+- **SHOULD**: Recommended but not required
+- **MAY**: Optional features
+
+## 📜 License
+
+MIT License - see [LICENSE](LICENSE) file for details
+
+## 🙏 Acknowledgments
+
+- [Textual](https://textual.textualize.io/) - Amazing TUI framework
+- [OpenSpec](https://github.com/Fission-AI/OpenSpec) - Spec-driven development framework
+- [Anthropic](https://www.anthropic.com/) - Claude AI assistance
+
+## 💬 Support
+
+- 💬 [Join OpenSpec Discord](https://discord.gg/YctCnvvshC)
+- 🐛 [Report Issues](https://github.com/your-repo/openspec-tui/issues)
+- 📧 Email: support@yourproject.com
+- 🐦 Twitter: [@0xTab](https://twitter.com/0xTab)
+
+## 🗺️ Roadmap
+
+### v1.0 (Current)
+- ✅ Create new OpenSpec changes
+- ✅ Multi-tab markdown editor
+- ✅ Auto-generate folder structure
+- ✅ Save to disk
+
+### v1.1 (Planned)
+- [ ] Browse and edit existing changes
+- [ ] Real-time spec validation
+- [ ] Markdown preview mode
+- [ ] Task completion tracking
+
+### v1.2 (Future)
+- [ ] Git integration (auto-commit)
+- [ ] AI assistant integration (Claude API)
+- [ ] Template customization UI
+- [ ] Export to PDF/HTML
+
+### v2.0 (Vision)
+- [ ] Collaborative editing
+- [ ] Change review workflow
+- [ ] Analytics dashboard
+- [ ] Plugin system
+
+---
+
+**Built with ❤️ for the OpenSpec community**
+
+[⬆ Back to Top](#openspec-tui-editor)
