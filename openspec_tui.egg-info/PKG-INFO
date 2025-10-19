@@ -1,3 +1,61 @@
+Metadata-Version: 2.4
+Name: openspec-tui
+Version: 1.0.0
+Summary: A beautiful terminal user interface for creating and editing OpenSpec specifications
+Author-email: OpenSpec TUI Team <support@openspec.dev>
+Maintainer-email: OpenSpec TUI Team <support@openspec.dev>
+License-Expression: MIT
+Project-URL: Homepage, https://github.com/Fission-AI/openspec-tui
+Project-URL: Documentation, https://openspec-tui.readthedocs.io/
+Project-URL: Repository, https://github.com/Fission-AI/openspec-tui.git
+Project-URL: Bug Tracker, https://github.com/Fission-AI/openspec-tui/issues
+Project-URL: Changelog, https://github.com/Fission-AI/openspec-tui/blob/main/CHANGELOG.md
+Project-URL: Discord, https://discord.gg/YctCnvvshC
+Project-URL: Twitter, https://twitter.com/0xTab
+Keywords: openspec,tui,terminal,textual,specification,ai,development,markdown,editor
+Classifier: Development Status :: 5 - Production/Stable
+Classifier: Intended Audience :: Developers
+Classifier: Operating System :: OS Independent
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.8
+Classifier: Programming Language :: Python :: 3.9
+Classifier: Programming Language :: Python :: 3.10
+Classifier: Programming Language :: Python :: 3.11
+Classifier: Programming Language :: Python :: 3.12
+Classifier: Topic :: Software Development :: Libraries :: Python Modules
+Classifier: Topic :: Software Development :: User Interfaces
+Classifier: Topic :: Text Editors
+Classifier: Topic :: Terminals
+Classifier: Environment :: Console
+Classifier: Framework :: Textual
+Requires-Python: >=3.8
+Description-Content-Type: text/markdown
+Requires-Dist: textual<1.0.0,>=0.41.0
+Provides-Extra: dev
+Requires-Dist: black<24.0.0,>=23.0.0; extra == "dev"
+Requires-Dist: isort<6.0.0,>=5.12.0; extra == "dev"
+Requires-Dist: flake8<7.0.0,>=6.0.0; extra == "dev"
+Requires-Dist: mypy<2.0.0,>=1.5.0; extra == "dev"
+Requires-Dist: pytest<8.0.0,>=7.4.0; extra == "dev"
+Requires-Dist: pytest-cov<5.0.0,>=4.1.0; extra == "dev"
+Requires-Dist: pytest-mock<4.0.0,>=3.11.0; extra == "dev"
+Requires-Dist: pre-commit<4.0.0,>=3.4.0; extra == "dev"
+Requires-Dist: tox<5.0.0,>=4.6.0; extra == "dev"
+Requires-Dist: sphinx<8.0.0,>=7.1.0; extra == "dev"
+Requires-Dist: sphinx-rtd-theme<2.0.0,>=1.3.0; extra == "dev"
+Provides-Extra: test
+Requires-Dist: pytest<8.0.0,>=7.4.0; extra == "test"
+Requires-Dist: pytest-cov<5.0.0,>=4.1.0; extra == "test"
+Requires-Dist: pytest-mock<4.0.0,>=3.11.0; extra == "test"
+Provides-Extra: docs
+Requires-Dist: sphinx<8.0.0,>=7.1.0; extra == "docs"
+Requires-Dist: sphinx-rtd-theme<2.0.0,>=1.3.0; extra == "docs"
+Requires-Dist: myst-parser<3.0.0,>=2.0.0; extra == "docs"
+Provides-Extra: security
+Requires-Dist: bandit<2.0.0,>=1.7.5; extra == "security"
+Requires-Dist: safety<3.0.0,>=2.3.0; extra == "security"
+Requires-Dist: semgrep<2.0.0,>=1.40.0; extra == "security"
+
 # OpenSpec TUI Editor
 
 > A beautiful terminal user interface for creating and editing OpenSpec specifications
@@ -66,55 +124,32 @@ OpenSpec TUI Editor is a keyboard-driven terminal application that streamlines t
 
 ### Installation
 
-#### Option 1: Install from PyPI (Recommended)
 ```bash
-# Install the package
-pip install openspec-tui
+# Install Textual
+pip install textual
 
-# Run the TUI editor
-openspec-tui
-```
+# Download the editor
+curl -O https://raw.githubusercontent.com/your-repo/openspec-tui/main/openspec_tui.py
 
-#### Option 2: Install from Source
-```bash
-# Clone the repository
-git clone https://github.com/Fission-AI/openspec-tui.git
-cd openspec-tui
-
-# Install in development mode
-pip install -e .
-
-# Run the TUI editor
-openspec-tui
-```
-
-#### Option 3: Development Installation
-```bash
-# Install with development dependencies
-pip install -e ".[dev,test,security]"
-
-# Run the TUI editor
-openspec-tui
+# Make it executable (optional)
+chmod +x openspec_tui.py
 ```
 
 ### Usage
 
 ```bash
-# Run the TUI editor (after installation)
-openspec-tui
+# Run the TUI editor
+python openspec_tui.py
 
-# Alternative command
-openspec-tui-editor
-
-# Run directly from source (development)
-python -m openspec_tui
+# Or if you made it executable
+./openspec_tui.py
 ```
 
 ## 📖 User Guide
 
 ### Creating a New Change
 
-1. Launch the application: `openspec-tui`
+1. Launch the application: `python openspec_tui.py`
 2. Select **"Create New Change"** from the main menu
 3. Fill in the required information:
    - **Change Name**: Use kebab-case (e.g., `add-user-profile`)
@@ -225,7 +260,7 @@ This TUI editor seamlessly integrates with the OpenSpec workflow:
 
 ### 1. Create with TUI
 ```bash
-openspec-tui
+python openspec_tui.py
 # Create your change using the interactive editor
 ```
 
@@ -251,49 +286,11 @@ openspec validate your-change-name
 openspec archive your-change-name
 ```
 
-## 📦 Project Structure
-
-The OpenSpec TUI Editor is now a proper Python package with the following structure:
-
-```
-openspec-tui/
-├── pyproject.toml              # Project configuration and dependencies
-├── README.md                   # This file
-├── openspec_tui/              # Main package directory
-│   └── __init__.py            # Application code and entry point
-└── openspec-tui.py            # Legacy standalone script (deprecated)
-```
-
-### Package Management
-
-The project uses modern Python packaging standards:
-
-- **`pyproject.toml`**: PEP 621 compliant project configuration
-- **Entry Points**: Console scripts `openspec-tui` and `openspec-tui-editor`
-- **Dependencies**: Minimal runtime dependencies (only Textual)
-- **Development**: Comprehensive dev dependencies for testing, linting, and security
-
-### Installation Methods
-
-```bash
-# PyPI installation (recommended)
-pip install openspec-tui
-
-# Development installation
-pip install -e ".[dev,test,security]"
-
-# Using UV (ultra-fast)
-uv add openspec-tui
-
-# Using Poetry
-poetry add openspec-tui
-```
-
 ## 🛠️ Advanced Usage
 
 ### Custom Templates
 
-To customize templates, edit the template strings in `openspec_tui/__init__.py`:
+To customize templates, edit the template strings in `openspec_tui.py`:
 
 ```python
 PROPOSAL_TEMPLATE = """
@@ -352,7 +349,7 @@ Let's create a complete OpenSpec change for adding two-factor authentication:
 
 ```bash
 # 1. Launch TUI
-openspec-tui
+python openspec_tui.py
 
 # 2. Create new change
 Change Name: add-2fa
@@ -412,59 +409,18 @@ Open an issue with:
 
 ```bash
 # Clone the repository
-git clone https://github.com/Fission-AI/openspec-tui.git
+git clone https://github.com/your-username/openspec-tui.git
 cd openspec-tui
 
-# Install with development dependencies
-pip install -e ".[dev,test,security]"
+# Install dependencies
+pip install textual textual-dev
 
 # Run in development mode with live reload
-textual run --dev openspec_tui/__init__.py
+textual run --dev openspec_tui.py
 
 # Run tests
-pytest
-
-# Run linting and formatting
-black openspec_tui/
-isort openspec_tui/
-flake8 openspec_tui/
-mypy openspec_tui/
-
-# Run security checks
-bandit -r openspec_tui/
-safety check
-
-# Run pre-commit hooks
-pre-commit run --all-files
-
-# Run all quality checks
-tox
+python -m pytest tests/
 ```
-
-### Quality Tools
-
-The project includes comprehensive quality and security tools:
-
-**Code Quality:**
-- **Black**: Code formatting with 88-character line length
-- **isort**: Import sorting with Black compatibility  
-- **Flake8**: Style and complexity checking
-- **MyPy**: Strict type checking for security
-- **Ruff**: Fast alternative linter with security rules
-
-**Testing:**
-- **Pytest**: Comprehensive testing framework
-- **Coverage**: 80% test coverage requirement
-- **Tox**: Multi-version testing across Python 3.8-3.12
-
-**Security:**
-- **Bandit**: Security vulnerability scanning
-- **Safety**: Dependency security scanning
-- **Semgrep**: Advanced security rules
-- **Pre-commit**: Automated quality checks
-
-**Configuration:**
-All tools are configured in `pyproject.toml` with enterprise-grade settings for maximum security and code quality.
 
 ## 🐛 Troubleshooting
 
@@ -492,11 +448,7 @@ export TERM=xterm-256color
 
 **Solution**:
 ```bash
-# Install the package properly
-pip install openspec-tui
-
-# Or if installing from source
-pip install -e .
+pip install --upgrade textual
 ```
 
 ### Permission errors when saving
@@ -510,7 +462,7 @@ chmod -R u+w openspec/
 
 # Or run from your project root
 cd /path/to/your/project
-openspec-tui
+python /path/to/openspec_tui.py
 ```
 
 ## 📚 Resources
@@ -538,7 +490,7 @@ Let's add a "password reset" feature step by step:
 #### Step 1: Launch & Create
 
 ```bash
-openspec-tui
+python openspec_tui.py
 ```
 
 Select "Create New Change" and fill in:
@@ -699,10 +651,6 @@ MIT License - see [LICENSE](LICENSE) file for details
 - ✅ Multi-tab markdown editor
 - ✅ Auto-generate folder structure
 - ✅ Save to disk
-- ✅ Proper Python package with pyproject.toml
-- ✅ Console script entry points
-- ✅ Enterprise-grade development tools
-- ✅ Security scanning and quality enforcement
 
 ### v1.1 (Planned)
 - [ ] Browse and edit existing changes

@@ -1,0 +1,9 @@
+README.md
+pyproject.toml
+openspec_tui/__init__.py
+openspec_tui.egg-info/PKG-INFO
+openspec_tui.egg-info/SOURCES.txt
+openspec_tui.egg-info/dependency_links.txt
+openspec_tui.egg-info/entry_points.txt
+openspec_tui.egg-info/requires.txt
+openspec_tui.egg-info/top_level.txt

@@ -1,0 +1,9 @@
+[console_scripts]
+openspec-tui = openspec_tui:main
+openspec-tui-editor = openspec_tui:main
+
+[gui_scripts]
+openspec-tui-gui = openspec_tui:main
+
+[openspec.plugins]
+tui-editor = openspec_tui:OpenSpecTUI
